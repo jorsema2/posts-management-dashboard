@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserPosts from "../components/UserPosts";
-import { getPosts } from "../utils/postsAPIClient";
+import { getPosts, deletePost } from "../utils/postsAPIClient";
 
 const UsersFeedPage = () => {
   const [users, setUsers] = useState([]);
@@ -23,16 +23,21 @@ const UsersFeedPage = () => {
     }
   }
 
-  const deletePost = (userId, postId) => {
-    setUsers((prevUsers) => {
-      const updatedUsers = { ...prevUsers };
+  const removePost = async (userId, postId) => {
+    // Data changes of this method will not be persisted on the server, but I programmed as if they did based on the assessment requirements.
+    const response = await deletePost(postId);
 
-      updatedUsers[userId] = updatedUsers[userId].filter(
-        (post) => post.id !== postId
-      );
+    if (response.message === "OK") {
+      setUsers((prevUsers) => {
+        const updatedUsers = { ...prevUsers };
 
-      return updatedUsers;
-    });
+        updatedUsers[userId] = updatedUsers[userId].filter(
+          (post) => post.id !== postId
+        );
+
+        return updatedUsers;
+      });
+    }
   };
 
   useEffect(() => {
@@ -42,7 +47,7 @@ const UsersFeedPage = () => {
   return (
     <div>
       {Object.entries(users).map(([userId, userPosts]) => (
-        <UserPosts key={userId} posts={userPosts} deletePost={deletePost} />
+        <UserPosts key={userId} posts={userPosts} deletePost={removePost} />
       ))}
     </div>
   );
