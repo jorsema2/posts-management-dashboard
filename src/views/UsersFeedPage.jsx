@@ -3,11 +3,10 @@ import UserPosts from "../components/UserPosts";
 import { getPosts } from "../utils/postsAPIClient";
 
 const UsersFeedPage = () => {
-  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   async function fetchPosts() {
     const data = await getPosts();
-
     if (Array.isArray(data)) {
       const postsGroupedByUser = data.reduce((acc, post) => {
         const { userId } = post;
@@ -18,7 +17,7 @@ const UsersFeedPage = () => {
         return acc;
       }, {});
 
-      setPosts(postsGroupedByUser);
+      setUsers(postsGroupedByUser);
     } else {
       console.error("Expected data to be an array");
     }
@@ -30,8 +29,7 @@ const UsersFeedPage = () => {
 
   return (
     <div>
-      UsersFeedPage
-      {Object.entries(posts).map(([userId, userPosts]) => (
+      {Object.entries(users).map(([userId, userPosts]) => (
         <UserPosts key={userId} posts={userPosts} />
       ))}
     </div>
