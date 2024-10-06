@@ -1,11 +1,11 @@
 import React from "react";
 
-const Comment = () => {
+const Comment = ({ comment }) => {
   return (
-    <div>
-      <div>Comment 1</div>
-      <div>John Doe (name)</div>
-      <div>CommentBody</div>
+    <div style={{ border: "1px solid blue" }}>
+      <div>{comment.name}</div>
+      <div>{comment.email}</div>
+      <div>{comment.body}</div>
     </div>
   );
 };

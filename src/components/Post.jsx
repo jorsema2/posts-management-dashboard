@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CommentSection from "./CommentSection";
 
 const Post = ({ post }) => {
@@ -8,7 +8,7 @@ const Post = ({ post }) => {
         <div>{post.title}</div>
         <div>{post.body}</div>
       </div>
-      <CommentSection />
+      <CommentSection postId={post.id} />
       <button>Delete</button>
     </div>
   );

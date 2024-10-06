@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
+import { getPostComments } from "../utils/postsAPIClient";
 
-const CommentSection = () => {
+const CommentSection = ({ postId }) => {
+  const [comments, setComments] = useState([]);
+
+  async function fetchPosts() {
+    const data = await getPostComments(postId);
+    if (Array.isArray(data)) {
+      setComments(data);
+    } else {
+      console.error("Expected data to be an array");
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <div>
-      <Comment />
+      {comments?.map((comment) => (
+        <Comment key={comment.id} comment={comment} />
+      ))}
     </div>
   );
 };
