@@ -5,19 +5,35 @@ import { getPosts } from "../utils/postsAPIClient";
 const UsersFeedPage = () => {
   const [posts, setPosts] = useState([]);
 
-  async function getAllPosts() {
-    const response = await getPosts();
-    setPosts(response);
+  async function fetchPosts() {
+    const data = await getPosts();
+
+    if (Array.isArray(data)) {
+      const postsGroupedByUser = data.reduce((acc, post) => {
+        const { userId } = post;
+        if (!acc[userId]) {
+          acc[userId] = [];
+        }
+        acc[userId].push(post);
+        return acc;
+      }, {});
+
+      setPosts(postsGroupedByUser);
+    } else {
+      console.error("Expected data to be an array");
+    }
   }
 
   useEffect(() => {
-    getAllPosts();
+    fetchPosts();
   }, []);
 
   return (
     <div>
       UsersFeedPage
-      <UserPosts posts={posts} />
+      {Object.entries(posts).map(([userId, userPosts]) => (
+        <UserPosts key={userId} posts={userPosts} />
+      ))}
     </div>
   );
 };
