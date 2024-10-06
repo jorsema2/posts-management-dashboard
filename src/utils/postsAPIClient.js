@@ -14,6 +14,6 @@ export async function getPosts() {
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
-        throw error; // Optional: re-throw the error for further handling
+        throw error;
     }
 }

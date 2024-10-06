@@ -1,12 +1,12 @@
 import React from "react";
 import CommentSection from "./CommentSection";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div>
       <div>
-        <div>Post Title</div>
-        <div>Post Body</div>
+        <div>{post.title}</div>
+        <div>{post.body}</div>
       </div>
       <CommentSection />
       <button>Delete</button>

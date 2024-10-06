@@ -1,10 +1,12 @@
 import React from "react";
 import Post from "./Post";
 
-const PostsList = () => {
+const PostsList = ({ posts }) => {
   return (
     <div>
-      <Post />
+      {posts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
     </div>
   );
 };

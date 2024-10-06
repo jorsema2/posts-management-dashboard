@@ -2,11 +2,11 @@ import React from "react";
 import PostsList from "./PostsList";
 import PostForm from "./PostForm";
 
-const UserPosts = () => {
+const UserPosts = ({ posts }) => {
   return (
     <div>
       <h3>User 1</h3>
-      <PostsList />
+      <PostsList posts={posts} />
       <button>Add</button>
       <PostForm />
     </div>
