@@ -1,18 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PostForm = () => {
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    // To manage userPosts state with a call to the endpoint
+  };
+
   return (
-    <form>
-      <h3>Create a post</h3>
+    <form onSubmit={handleSubmit}>
+      <h3>Create a Post</h3>
       <div>
-        <label>Title</label>
-        <input></input>
+        <label htmlFor="title">Post Title:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div>
-        <label>Content</label>
-        <textarea></textarea>
+        <label htmlFor="content">Post Content:</label>
+        <textarea
+          id="content"
+          name="content"
+          value={formData.content}
+          onChange={handleChange}
+          required
+          rows="4"
+          cols="50"
+        />
       </div>
-      <button>Create</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
