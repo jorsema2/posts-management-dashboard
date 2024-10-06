@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CommentSection from "./CommentSection";
 
-const Post = ({ post }) => {
+const Post = ({ post, deletePost }) => {
   const [shouldShowComments, setshouldShowComments] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ const Post = ({ post }) => {
         {(shouldShowComments && "Hide comments") || "Show comments"}
       </button>
       {shouldShowComments && <CommentSection postId={post.id} />}
-      <button>Delete</button>
+      <button onClick={() => deletePost(post.userId, post.id)}>Delete</button>
     </div>
   );
 };

@@ -23,6 +23,18 @@ const UsersFeedPage = () => {
     }
   }
 
+  const deletePost = (userId, postId) => {
+    setUsers((prevUsers) => {
+      const updatedUsers = { ...prevUsers };
+
+      updatedUsers[userId] = updatedUsers[userId].filter(
+        (post) => post.id !== postId
+      );
+
+      return updatedUsers;
+    });
+  };
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -30,7 +42,7 @@ const UsersFeedPage = () => {
   return (
     <div>
       {Object.entries(users).map(([userId, userPosts]) => (
-        <UserPosts key={userId} posts={userPosts} />
+        <UserPosts key={userId} posts={userPosts} deletePost={deletePost} />
       ))}
     </div>
   );
