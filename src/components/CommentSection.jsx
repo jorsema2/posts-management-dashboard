@@ -5,7 +5,7 @@ import { getPostComments } from "../utils/postsAPIClient";
 const CommentSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
 
-  async function fetchPosts() {
+  async function fetchComments() {
     const data = await getPostComments(postId);
     if (Array.isArray(data)) {
       setComments(data);
@@ -15,7 +15,7 @@ const CommentSection = ({ postId }) => {
   }
 
   useEffect(() => {
-    fetchPosts();
+    fetchComments();
   }, []);
 
   return (

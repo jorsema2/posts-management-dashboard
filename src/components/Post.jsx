@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import CommentSection from "./CommentSection";
 
 const Post = ({ post }) => {
+  const [shouldShowComments, setshouldShowComments] = useState(false);
+
   return (
     <div>
       <div>
         <div>{post.title}</div>
         <div>{post.body}</div>
       </div>
-      <CommentSection postId={post.id} />
+      <button onClick={() => setshouldShowComments(!shouldShowComments)}>
+        {(shouldShowComments && "Hide comments") || "Show comments"}
+      </button>
+      {shouldShowComments && <CommentSection postId={post.id} />}
       <button>Delete</button>
     </div>
   );
