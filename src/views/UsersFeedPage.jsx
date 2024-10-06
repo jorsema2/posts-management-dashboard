@@ -6,8 +6,6 @@ const UsersFeedPage = () => {
     <div>
       UsersFeedPage
       <UserPosts />
-      <UserPosts />
-
     </div>
   );
 };
