@@ -11,7 +11,7 @@ import cloneDeep from "lodash.clonedeep";
 const UsersFeedPage = () => {
   const [usersWithTheirPosts, setUsersWithTheirPosts] = useState({});
 
-  async function fetchPosts() {
+  const fetchPosts = async () => {
     const data = await getPosts();
     const users = await getUsers();
 
@@ -37,7 +37,7 @@ const UsersFeedPage = () => {
     } else {
       console.error("Expected data to be an array");
     }
-  }
+  };
 
   const removePost = async (userId, postId) => {
     // Data changes of this method will not be persisted on the server, but I programmed as if they did based on the assessment requirements.

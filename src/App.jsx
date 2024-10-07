@@ -1,12 +1,12 @@
 import "./App.css";
 import UsersFeedPage from "./views/UsersFeedPage";
 
-function App() {
+const App = () => {
   return (
     <>
       <UsersFeedPage />
     </>
   );
-}
+};
 
 export default App;

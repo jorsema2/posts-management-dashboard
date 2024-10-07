@@ -5,14 +5,14 @@ import { getPostComments } from "../utils/postsAPIClient";
 const CommentSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
 
-  async function fetchComments() {
+  const fetchComments = async () => {
     const data = await getPostComments(postId);
     if (Array.isArray(data)) {
       setComments(data);
     } else {
       console.error("Expected data to be an array");
     }
-  }
+  };
 
   useEffect(() => {
     fetchComments();

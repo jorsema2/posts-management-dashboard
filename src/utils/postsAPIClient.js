@@ -1,4 +1,4 @@
-export async function getUsers() {
+export const getUsers = async () => {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/users", {
             headers: {
@@ -18,7 +18,7 @@ export async function getUsers() {
     }
 }
 
-export async function getPosts() {
+export const getPosts = async () => {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
             headers: {
@@ -39,7 +39,7 @@ export async function getPosts() {
 }
 
 // Data changes of this method will not be persisted on the server, but I programmed as if they did based on the assessment requirements.
-export async function deletePost(postId) {
+export const deletePost = async (postId) => {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
             method: "DELETE",
@@ -63,7 +63,7 @@ export async function deletePost(postId) {
 }
 
 // Data changes of this method will not persist on the server, but I programmed as if they did based on the assessment requirements.
-export async function createPost(post) {
+export const createPost = async (post) => {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
             method: "POST",
@@ -86,7 +86,7 @@ export async function createPost(post) {
     }
 }
 
-export async function getPostComments(postId) {
+export const getPostComments = async (postId) => {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`, {
             headers: {
