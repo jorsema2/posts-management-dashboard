@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserPosts from "../components/UserPosts";
-import { getPosts, deletePost } from "../utils/postsAPIClient";
+import { getPosts, deletePost, sendPost } from "../utils/postsAPIClient";
 import cloneDeep from "lodash.clonedeep";
 
 const UsersFeedPage = () => {
@@ -41,12 +41,17 @@ const UsersFeedPage = () => {
     }
   };
 
-  const submitPost = (userId, post) => {
-    const updatedUsers = cloneDeep(users);
+  const submitPost = async (userId, post) => {
+    // Data changes of this method will not be persisted on the server, but I programmed as if they did based on the assessment requirements.
+    const response = await sendPost(post);
 
-    updatedUsers[userId].push(post);
+    if (response.message === "OK") {
+      const updatedUsers = cloneDeep(users);
 
-    setUsers(updatedUsers);
+      updatedUsers[userId].push(post);
+
+      setUsers(updatedUsers);
+    }
   };
 
   useEffect(() => {

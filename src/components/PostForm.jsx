@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const PostForm = ({ userId, submitPost, closeForm }) => {
   const [formData, setFormData] = useState({
@@ -20,10 +19,10 @@ const PostForm = ({ userId, submitPost, closeForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title !== "" && body !== "") {
-      // Using uuid to ensure the id is unique, although the API uses auto-incrementing IDs
+      // Creating random Id to ensure the id is unique, although the API uses auto-incrementing IDs, plus avoiding "Encountered two children with the same key"
       submitPost(userId, {
         ...formData,
-        id: uuidv4(),
+        id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
       });
       setFormData({ userId: userId, title: "", body: "" });
     }
