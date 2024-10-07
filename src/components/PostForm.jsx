@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PostForm = ({ userId, submitPost }) => {
+const PostForm = ({ userId, submitPost, closeForm }) => {
   const [formData, setFormData] = useState({
     userId: userId,
     title: "",
@@ -19,7 +19,13 @@ const PostForm = ({ userId, submitPost }) => {
     e.preventDefault();
     if (title !== "" && body !== "") {
       submitPost(userId, formData);
+      setFormData({ userId: userId, title: "", body: "" });
     }
+  };
+
+  const hadleClose = () => {
+    setFormData({ userId: userId, title: "", body: "" });
+    closeForm();
   };
 
   return (
@@ -49,6 +55,9 @@ const PostForm = ({ userId, submitPost }) => {
         />
       </div>
       <button type="submit">Submit</button>
+      <button onClick={hadleClose} type="button">
+        Close
+      </button>
     </form>
   );
 };

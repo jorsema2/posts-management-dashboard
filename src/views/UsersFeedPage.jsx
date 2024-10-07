@@ -50,11 +50,7 @@ const UsersFeedPage = () => {
   };
 
   useEffect(() => {
-    // const abortController = new AbortController();
-
     fetchPosts();
-
-    // return () => abortController.abort();
   }, []);
 
   return (
