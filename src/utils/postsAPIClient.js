@@ -32,7 +32,10 @@ export async function deletePost(postId) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        return { message: "OK", data: response.data };
+        const responseData = await response.json();
+
+        return { message: "OK", data: responseData };
+
     } catch (error) {
         console.error('Error deleting data:', error);
         throw error;

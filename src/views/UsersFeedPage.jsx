@@ -29,15 +29,13 @@ const UsersFeedPage = () => {
     const response = await deletePost(postId);
 
     if (response.message === "OK") {
-      setUsers((prevUsers) => {
-        const updatedUsers = { ...prevUsers };
+      const updatedUsers = cloneDeep(users);
 
-        updatedUsers[userId] = updatedUsers[userId].filter(
-          (post) => post.id !== postId
-        );
+      updatedUsers[userId] = updatedUsers[userId].filter(
+        (post) => post.id !== postId
+      );
 
-        return updatedUsers;
-      });
+      setUsers(updatedUsers);
     }
   };
 
@@ -50,7 +48,6 @@ const UsersFeedPage = () => {
 
       // Creating random Id to ensure the id is unique
       // to avoid "Encountered two children with the same key" because the API always returns id 101.
-
       response.data.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
       updatedUsers[userId].push(response.data);
