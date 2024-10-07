@@ -3,12 +3,12 @@ beforeEach(() => {
 });
 
 
-describe('Users Feed Page', () => {
+describe('Users feed page', () => {
   it('should display a user with the name "Leanne Graham" in the feed', function () {
     cy.contains('Leanne Graham').should('be.visible');
   });
 
-  it('should show comments when clicking on "Show Comments"', function () {
+  it('should show comments when clicking on the first "Show comments" button', function () {
     cy.contains('Show comments').first().click();
 
     cy.contains('id labore ex et quam laborum').should('be.visible');
