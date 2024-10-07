@@ -9,8 +9,7 @@ const UsersFeedPage = () => {
   async function fetchPosts() {
     const data = await getPosts();
     if (Array.isArray(data)) {
-      const newData = cloneDeep(data);
-      const postsGroupedByUser = newData.reduce((acc, post) => {
+      const postsGroupedByUser = data.reduce((acc, post) => {
         const { userId } = post;
         if (!acc[userId]) {
           acc[userId] = [];
@@ -43,17 +42,19 @@ const UsersFeedPage = () => {
   };
 
   const submitPost = (userId, post) => {
-    setUsers((prevUsers) => {
-      const updatedUsers = { ...prevUsers };
+    const updatedUsers = cloneDeep(users);
 
-      updatedUsers[userId].push(post);
+    updatedUsers[userId].push(post);
 
-      return updatedUsers;
-    });
+    setUsers(updatedUsers);
   };
 
   useEffect(() => {
+    // const abortController = new AbortController();
+
     fetchPosts();
+
+    // return () => abortController.abort();
   }, []);
 
   return (

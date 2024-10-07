@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 const PostForm = ({ userId, submitPost }) => {
   const [formData, setFormData] = useState({
+    userId: userId,
     title: "",
     body: "",
-    userId: userId,
   });
 
   const handleChange = (e) => {
@@ -15,7 +15,8 @@ const PostForm = ({ userId, submitPost }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (title !== "" && body !== "") {
       submitPost(userId, formData);
     }
