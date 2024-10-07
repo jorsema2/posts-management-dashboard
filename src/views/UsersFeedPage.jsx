@@ -4,7 +4,7 @@ import {
   getUsers,
   getPosts,
   deletePost,
-  sendPost,
+  createPost,
 } from "../utils/postsAPIClient";
 import cloneDeep from "lodash.clonedeep";
 
@@ -56,7 +56,7 @@ const UsersFeedPage = () => {
 
   const submitPost = async (userId, post) => {
     // Data changes of this method will not be persisted on the server, but I programmed as if they did based on the assessment requirements.
-    const response = await sendPost(post);
+    const response = await createPost(post);
 
     if (response.message === "OK") {
       const updatedUsers = cloneDeep(usersWithTheirPosts);

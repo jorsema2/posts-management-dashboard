@@ -63,7 +63,7 @@ export async function deletePost(postId) {
 }
 
 // Data changes of this method will not persist on the server, but I programmed as if they did based on the assessment requirements.
-export async function sendPost(post) {
+export async function createPost(post) {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
             method: "POST",
