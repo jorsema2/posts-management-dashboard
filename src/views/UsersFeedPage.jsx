@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from "react";
 import UserPosts from "../components/UserPosts";
-import { getPosts, deletePost, sendPost } from "../utils/postsAPIClient";
+import {
+  getUsers,
+  getPosts,
+  deletePost,
+  sendPost,
+} from "../utils/postsAPIClient";
 import cloneDeep from "lodash.clonedeep";
 
 const UsersFeedPage = () => {
-  const [users, setUsers] = useState({});
+  const [usersWithTheirPosts, setUsersWithTheirPosts] = useState({});
 
   async function fetchPosts() {
     const data = await getPosts();
+    const users = await getUsers();
+
     if (Array.isArray(data)) {
       const postsGroupedByUser = data.reduce((acc, post) => {
         const { userId } = post;
+
+        const user = users.find((u) => u.id === userId);
+
         if (!acc[userId]) {
-          acc[userId] = [];
+          acc[userId] = {
+            name: user ? user.name : "Unknown",
+            posts: [],
+          };
         }
-        acc[userId].push(post);
+
+        acc[userId].posts.push(post);
+
         return acc;
       }, {});
 
-      setUsers(postsGroupedByUser);
+      setUsersWithTheirPosts(postsGroupedByUser);
     } else {
       console.error("Expected data to be an array");
     }
@@ -29,13 +44,13 @@ const UsersFeedPage = () => {
     const response = await deletePost(postId);
 
     if (response.message === "OK") {
-      const updatedUsers = cloneDeep(users);
+      const updatedUsers = cloneDeep(usersWithTheirPosts);
 
-      updatedUsers[userId] = updatedUsers[userId].filter(
+      updatedUsers[userId].posts = updatedUsers[userId].posts.filter(
         (post) => post.id !== postId
       );
 
-      setUsers(updatedUsers);
+      setUsersWithTheirPosts(updatedUsers);
     }
   };
 
@@ -44,15 +59,15 @@ const UsersFeedPage = () => {
     const response = await sendPost(post);
 
     if (response.message === "OK") {
-      const updatedUsers = cloneDeep(users);
+      const updatedUsers = cloneDeep(usersWithTheirPosts);
 
       // Creating random Id to ensure the id is unique
       // to avoid "Encountered two children with the same key" because the API always returns id 101.
       response.data.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
-      updatedUsers[userId].push(response.data);
+      updatedUsers[userId].posts.push(response.data);
 
-      setUsers(updatedUsers);
+      setUsersWithTheirPosts(updatedUsers);
     }
   };
 
@@ -62,10 +77,11 @@ const UsersFeedPage = () => {
 
   return (
     <div>
-      {Object.entries(users).map(([userId, userPosts]) => (
+      {Object.entries(usersWithTheirPosts).map(([userId, userData]) => (
         <UserPosts
           key={userId}
-          posts={userPosts}
+          name={userData.name}
+          posts={userData.posts}
           deletePost={removePost}
           submitPost={submitPost}
         />
