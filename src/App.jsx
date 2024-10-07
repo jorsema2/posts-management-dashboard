@@ -1,10 +1,13 @@
+import React from "react";
 import "./App.css";
 import UsersFeedPage from "./views/UsersFeedPage";
 
 function App() {
   return (
     <>
-      <UsersFeedPage />
+      <React.StrictMode>
+        <UsersFeedPage />
+      </React.StrictMode>
     </>
   );
 }

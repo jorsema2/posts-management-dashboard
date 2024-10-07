@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import UserPosts from "../components/UserPosts";
 import { getPosts, deletePost } from "../utils/postsAPIClient";
+import cloneDeep from "lodash.clonedeep";
 
 const UsersFeedPage = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({});
 
   async function fetchPosts() {
     const data = await getPosts();
     if (Array.isArray(data)) {
-      const postsGroupedByUser = data.reduce((acc, post) => {
+      const newData = cloneDeep(data);
+      const postsGroupedByUser = newData.reduce((acc, post) => {
         const { userId } = post;
         if (!acc[userId]) {
           acc[userId] = [];
@@ -40,6 +42,16 @@ const UsersFeedPage = () => {
     }
   };
 
+  const submitPost = (userId, post) => {
+    setUsers((prevUsers) => {
+      const updatedUsers = { ...prevUsers };
+
+      updatedUsers[userId].push(post);
+
+      return updatedUsers;
+    });
+  };
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -47,7 +59,12 @@ const UsersFeedPage = () => {
   return (
     <div>
       {Object.entries(users).map(([userId, userPosts]) => (
-        <UserPosts key={userId} posts={userPosts} deletePost={removePost} />
+        <UserPosts
+          key={userId}
+          posts={userPosts}
+          deletePost={removePost}
+          submitPost={submitPost}
+        />
       ))}
     </div>
   );
