@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const PostForm = ({ userId, submitPost, closeForm }) => {
   const [formData, setFormData] = useState({
     userId: userId,
     title: "",
     body: "",
+    id: "",
   });
 
   const handleChange = (e) => {
@@ -18,7 +20,11 @@ const PostForm = ({ userId, submitPost, closeForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title !== "" && body !== "") {
-      submitPost(userId, formData);
+      // Using uuid to ensure the id is unique, although the API uses auto-incrementing IDs
+      submitPost(userId, {
+        ...formData,
+        id: uuidv4(),
+      });
       setFormData({ userId: userId, title: "", body: "" });
     }
   };
