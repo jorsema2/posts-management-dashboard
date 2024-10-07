@@ -5,7 +5,6 @@ const PostForm = ({ userId, submitPost, closeForm }) => {
     userId: userId,
     title: "",
     body: "",
-    id: "",
   });
 
   const handleChange = (e) => {
@@ -19,11 +18,7 @@ const PostForm = ({ userId, submitPost, closeForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title !== "" && body !== "") {
-      // Creating random Id to ensure the id is unique, although the API uses auto-incrementing IDs, plus avoiding "Encountered two children with the same key"
-      submitPost(userId, {
-        ...formData,
-        id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-      });
+      submitPost(userId, formData);
       setFormData({ userId: userId, title: "", body: "" });
     }
   };
