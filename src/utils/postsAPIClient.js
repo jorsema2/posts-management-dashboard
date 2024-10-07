@@ -54,7 +54,9 @@ export async function sendPost(post) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        return { message: "OK", data: response.data };
+        const responseData = await response.json();
+
+        return { message: "OK", data: responseData };
     } catch (error) {
         console.error('Error submitting data:', error);
         throw error;

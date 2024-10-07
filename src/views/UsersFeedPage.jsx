@@ -48,7 +48,12 @@ const UsersFeedPage = () => {
     if (response.message === "OK") {
       const updatedUsers = cloneDeep(users);
 
-      updatedUsers[userId].push(post);
+      // Creating random Id to ensure the id is unique
+      // to avoid "Encountered two children with the same key" because the API always returns id 101.
+
+      response.data.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+
+      updatedUsers[userId].push(response.data);
 
       setUsers(updatedUsers);
     }
