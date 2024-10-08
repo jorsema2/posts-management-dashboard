@@ -8,15 +8,21 @@ const Post = ({ post, deletePost }) => {
   return (
     <Container>
       <DeleteButtonContainer>
-        <button onClick={() => deletePost(post.userId, post.id)}>Delete</button>
+        <DeleteButton onClick={() => deletePost(post.userId, post.id)}>
+          Delete
+        </DeleteButton>
       </DeleteButtonContainer>
       <PostContentContainer>
         <Title>{post.title}</Title>
         <Body>{post.body}</Body>
       </PostContentContainer>
-      <button onClick={() => setshouldShowComments(!shouldShowComments)}>
-        {(shouldShowComments && "Hide comments") || "Show comments"}
-      </button>
+      <CommentsButtonContainer>
+        <CommentsButton
+          onClick={() => setshouldShowComments(!shouldShowComments)}
+        >
+          {(shouldShowComments && "Hide comments") || "Show comments"}
+        </CommentsButton>
+      </CommentsButtonContainer>
       {shouldShowComments && <CommentSection postId={post.id} />}
     </Container>
   );
@@ -51,4 +57,36 @@ const Body = styled.p`
 const DeleteButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const DeleteButton = styled.button`
+  background-color: tomato;
+  color: #fff;
+  border: none;
+`;
+
+const CommentsButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const CommentsButton = styled.button`
+  background: transparent;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+    border: none;
+  }
 `;

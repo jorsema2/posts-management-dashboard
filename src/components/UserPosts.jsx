@@ -45,5 +45,6 @@ const UserName = styled.h3`
 const CreatePostButton = styled.button`
   width: 20%;
   align-self: center;
-  background-color: #ddd;
+  background-color: #008bd7;
+  color: #fff;
 `;

@@ -64,7 +64,7 @@ const PostForm = ({ userId, submitPost, closeForm }) => {
               cols="50"
             />
           </FieldContainer>
-          <button type="submit">Submit</button>
+          <SubmitButton type="submit">Submit</SubmitButton>
         </StyledForm>
       </FormContainer>
     </>
@@ -142,4 +142,11 @@ const CloseButton = styled.button`
   &:focus {
     outline: none;
   }
+`;
+
+const SubmitButton = styled.button`
+  width: 20%;
+  align-self: flex-end;
+  background-color: #008bd7;
+  color: #fff;
 `;
