@@ -21,13 +21,13 @@ Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 ## Proposed Solution
 
 
-- Divided the UI into small components and defined the component structure.
-- Designed the state architecture.
+- Divided the UI into small reusable components and defined the component structure in an easy way to test and extend the UI in the future.
+- Designed the state architecture using useState hooks. Given the app's simple structure, useState was sufficient for managing local state, and a global state management solution like Redux was unnecessary. If the app grew, it could be needed to add a global state management tool.
 - Created components and added calls to endpoints to show posts and comments.
-- Added the possibility to show and hide comments, so the comments endpoint would be called only when clicking on "Show comments".
+- Added the possibility to show and hide comments, so the comments endpoint would be called only when clicking on "Show comments", improving performance and user experience.
 - Added functionality to add and delete posts.
-- Used Cypress to create a test that checks posts are shown and another to check comments are shown when clicking on "Show comments".
-- Styled with Styled-components (CSS-in-JS).
+- Used Cypress to create a test that checks posts are shown and another to check comments are shown when clicking on "Show comments". It simulates real user interactions.
+- Styled with Styled-components (CSS-in-JS) to avoid naming clashes.
 - The UI design is loosely inspired by Facebook posts.
 
 
