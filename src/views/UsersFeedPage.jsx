@@ -12,11 +12,11 @@ const UsersFeedPage = () => {
   const [usersWithTheirPosts, setUsersWithTheirPosts] = useState({});
 
   const fetchPosts = async () => {
-    const data = await getPosts();
+    const posts = await getPosts();
     const users = await getUsers();
 
-    if (Array.isArray(data)) {
-      const postsGroupedByUser = data.reduce((acc, post) => {
+    if (Array.isArray(posts)) {
+      const postsGroupedByUser = posts.reduce((acc, post) => {
         const { userId } = post;
 
         const user = users.find((u) => u.id === userId);
@@ -61,7 +61,7 @@ const UsersFeedPage = () => {
     if (response.message === "OK") {
       const updatedUsers = cloneDeep(usersWithTheirPosts);
 
-      // Creating random Id to ensure the id is unique
+      // Creates random Id to ensure the id is unique
       // to avoid "Encountered two children with the same key" because the API always returns id 101.
       response.data.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
