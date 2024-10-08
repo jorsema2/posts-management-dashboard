@@ -15,7 +15,7 @@ from other endpoints and display it in the UI.
 Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 
 
-### [Click here to see the Video Review]([LINK_TO_LOOM_VIDEO])
+### [Click here to see the Video Review](https://www.loom.com/share/f7c06d214a5a4081aecf7489099a09b9?sid=7c2c6c60-2e56-4d89-b21d-49756e0b1adf)
 
 
 ## Proposed Solution
@@ -37,7 +37,7 @@ Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 ## Screenshots
 
 
-![alt text](assets/Posts-Management-Dashboard-10-08-2024_12_02_PM.png)
+![alt text](assets/Posts-Management-Dashboard-10-08-2024_12_02_PM.png)  
 
 
 ## Assumptions
