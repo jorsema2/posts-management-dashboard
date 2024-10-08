@@ -11,6 +11,6 @@ describe('Users feed page', () => {
   it('should show comments when clicking on the first "Show comments" button', function () {
     cy.contains('Show comments').first().click();
 
-    cy.contains('id labore ex et quam laborum').should('be.visible');
+    cy.contains('dignissimos et deleniti voluptate et quod').should('be.visible');
   });
 });
