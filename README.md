@@ -28,6 +28,7 @@ Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 - Added functionality to add and delete posts.
 - Used Cypress to create a test that checks posts are shown and another to check comments are shown when clicking on "Show comments".
 - Styled with Styled-components (CSS-in-JS).
+- The UI design is loosely inspired by Facebook posts.
 
 
 ### [Click here to see the Live Demo](https://reliable-parfait-cd0160.netlify.app/)
@@ -36,7 +37,7 @@ Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 ## Screenshots
 
 
-![alt text](assets\Posts-Management-Dashboard-10-08-2024_12_02_PM.png)
+![alt text](assets/Posts-Management-Dashboard-10-08-2024_12_02_PM.png)
 
 
 ## Assumptions
