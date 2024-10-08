@@ -4,7 +4,7 @@ import Post from "./Post";
 const PostsList = ({ posts, deletePost }) => {
   return (
     <div>
-      {posts.map((post) => (
+      {posts.slice().reverse().map((post) => (
         <Post key={post.id} post={post} deletePost={deletePost} />
       ))}
     </div>

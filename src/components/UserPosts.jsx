@@ -8,11 +8,12 @@ const UserPosts = ({ posts, deletePost, submitPost, name }) => {
 
   return (
     <Container>
-      <UserName>{name}</UserName>
-      <PostsList posts={posts} deletePost={deletePost} />
-      <CreatePostButton onClick={() => setShouldShowForm(!shouldShowForm)}>
-        Create a post
-      </CreatePostButton>
+      <HeaderContainer>
+        <UserName>{name}</UserName>
+        <CreatePostButton onClick={() => setShouldShowForm(!shouldShowForm)}>
+          Create a post
+        </CreatePostButton>
+      </HeaderContainer>
       {shouldShowForm && (
         <PostForm
           userId={posts[0].userId}
@@ -20,6 +21,7 @@ const UserPosts = ({ posts, deletePost, submitPost, name }) => {
           closeForm={() => setShouldShowForm(false)}
         />
       )}
+      <PostsList posts={posts} deletePost={deletePost} />
     </Container>
   );
 };
@@ -36,6 +38,11 @@ const Container = styled.div`
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const UserName = styled.h3`
