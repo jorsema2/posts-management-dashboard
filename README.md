@@ -44,7 +44,7 @@ Email: [Jorge Segura](mailto:jorsema2@gmail.com)
 
 
 - The application assumes data changes are not persistent on the server but will be reflected in the client upon a successful API response.
-
+- No authentication.
 
 ## Libraries / Tools Used
 
